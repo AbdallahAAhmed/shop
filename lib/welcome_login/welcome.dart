@@ -2,9 +2,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/welcome_login/sign_up.dart';
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
   static const String routeName = '/welcome_login';
   const WelcomePage({Key? key}) : super(key: key);
+
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String userInfo = '';
+  void onPress() {
+    setState(() {
+      if (_emailController.text.trim().isNotEmpty &&
+          _passwordController.text.trim().isNotEmpty) {
+        userInfo =
+            'email : ${_emailController.text}  - password :  ${_passwordController.text} ';
+      } else {
+        userInfo = 'Please fill the feilds ';
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +88,10 @@ class WelcomePage extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 40),
-                  const TextField(
+                  TextField(
+                    controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       label: Text('Email'),
                       labelStyle: TextStyle(
                         color: Colors.grey,
@@ -82,9 +103,10 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const TextField(
+                  TextField(
+                    controller: _passwordController,
                     obscureText: true,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       label: Text('Password'),
                       labelStyle: TextStyle(
                         color: Colors.grey,
@@ -111,7 +133,7 @@ class WelcomePage extends StatelessWidget {
                   SizedBox(
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: onPress,
                       child: const Text('SIGN IN'),
                       style: ButtonStyle(
                         backgroundColor:

@@ -1,9 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/welcome_login/verification.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   static const String routeName = '/sign_up';
   const SignUpPage({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String userInfoSignUp = '';
+  void onPress() {
+    setState(() {
+      if (_nameController.text.trim().isNotEmpty &&
+          _emailController.text.trim().isNotEmpty &&
+          _passwordController.text.trim().isNotEmpty) {
+        userInfoSignUp =
+            'Name : ${_nameController.text} - Email : ${_emailController.text} '
+            '- Password : ${_passwordController.text}';
+        Navigator.of(context).popAndPushNamed(VerificationPage.routeName);
+      } else {
+        userInfoSignUp = 'Please fill the feilds';
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +74,9 @@ class SignUpPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 40),
-              const TextField(
-                decoration: InputDecoration(
+              TextField(
+                controller: _nameController,
+                decoration: const InputDecoration(
                   label: Text('Name'),
                   labelStyle: TextStyle(
                     color: Colors.grey,
@@ -63,9 +88,10 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              const TextField(
+              TextField(
+                controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   label: Text('Email'),
                   labelStyle: TextStyle(
                     color: Colors.grey,
@@ -77,9 +103,10 @@ class SignUpPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              const TextField(
+              TextField(
+                controller: _passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   label: Text('Password'),
                   labelStyle: TextStyle(
                     color: Colors.grey,
@@ -94,8 +121,7 @@ class SignUpPage extends StatelessWidget {
               SizedBox(
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () => Navigator.of(context)
-                      .pushNamed(VerificationPage.routeName),
+                  onPressed: onPress,
                   child: const Text('SIGN UP'),
                   style: ButtonStyle(
                     backgroundColor:

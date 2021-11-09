@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/account/account.dart';
 import 'package:shop_app/welcome_login/sign_up.dart';
 import 'package:shop_app/welcome_login/verification.dart';
 import 'package:shop_app/welcome_login/welcome.dart';
@@ -14,12 +15,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'SF',
       ),
-      initialRoute: WelcomePage.routeName,
+      initialRoute: AccountPage.routeName,
       debugShowCheckedModeBanner: false,
       routes: {
         WelcomePage.routeName: (context) => const WelcomePage(),
         SignUpPage.routeName: (context) => const SignUpPage(),
         VerificationPage.routeName: (context) => const VerificationPage(),
+        AccountPage.routeName: (context) => const AccountPage(),
       },
     );
   }

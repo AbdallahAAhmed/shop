@@ -67,6 +67,11 @@ flutter:
     - assets/images/women_shoes.png
     - assets/images/speaker.png
     - assets/images/whatch.png
+    - assets/images/account_icon.png
+    - assets/images/cart_icon.png
+    - assets/images/explore_icon.png
+    - assets/images/profile.PNG
+    - assets/images/icon_edit_profile.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
